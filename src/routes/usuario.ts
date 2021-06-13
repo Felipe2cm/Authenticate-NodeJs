@@ -1,17 +1,16 @@
 import { Router } from 'express';
 import AutenticationService from '../services/authentication.service';
 import UsuarioService from '../services/usuario.service';
+import autenticacao from '../middlewares/auth';
 
 const router = Router();
 
-router.post('/gravar', (req, res) => {
+router.use(autenticacao);
 
-})
-
-router.get('/listar', async (req, res) => {
-
+router.get('/listar', async (_, res) => {
+    
     const service = new UsuarioService();
-
+    
     return res.json(await service.UsuarioListar());
 })
 
